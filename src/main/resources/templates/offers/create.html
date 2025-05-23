@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<th:block th:fragment="thymeleafAndThema">
+<!-- <th:block th:fragment="thymeleafAndThema">
 
     <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 
-</th:block>
+</th:block> -->
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     
@@ -24,9 +25,11 @@
 
         <div class="container my-4">
 
+<!-- RIGUARDA -->
 
-            <form id="offer-form" th:object="${offer}" th:action="@{/offers/create}" method="post">
-
+            <!-- <form id="offer-form" th:object="${offer}" th:action="@{/offers/create}" method="post"> -->
+            <form id="pizza-form" th:object="${offer}" th:action="${edit} ?  @{|/offers/edit/${offer.id}|} : @{/offers/create} " method="post">
+<!-- RIGUARDA -->
                 <input type="hidden" th:field="*{pizza}">
 
                 <div class="mb-3">
@@ -41,7 +44,6 @@
                         </ul>
 
                     </div>
-                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
                 <div class="mb-3">
                     <label for="startDate" class="form-label">data di inizio</label>
@@ -55,7 +57,6 @@
                         </ul>
 
                     </div>
-                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
                 <div class="mb-3">
                     <label for="finishDate" class="form-label">data di termine</label>
@@ -69,12 +70,11 @@
                         </ul>
 
                     </div>
-                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
 
               
                 
-                <input type="submit" class="btn btn-success" value="Crea offerta"/>
+                <input type="submit" class="btn btn-success" th:value="${edit} ? 'aggiorna offerta' : 'Crea offerta'"/> 
                 <input type="reset" class="btn btn-warning" value="resetta"/>
             </form>
         </div>

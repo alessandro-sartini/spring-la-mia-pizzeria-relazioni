@@ -30,14 +30,19 @@
 
 
          <div  class="container my-4 text-center">
-            <a th:href="@{/pizze/offers/{id}(id=*{id})}" class="btn btn-primary col-5 my-3">Crea offerta</a>
-
+            <!-- <a th:href="@{/pizze/create}" class="btn btn-primary col-5 m-1">Crea offerta</a> -->
+            <a th:href="@{/pizze/offers/{id}(id=${pizza.id})}" class="btn btn-success">Offerta pizza</a>
             <ul th:each="offer: ${pizza.offers}">
                 <li>
                     <h5 class="text-primary">[[${offer.title}]]</h5>
                     <span class="text-success">Data inizio: [[${offer.startDate}]] </span>
                     |||
                     <span class="text-danger">Data termine: [[${offer.finishDate}]]</span>
+<!-- RIGUARDA -->
+                    <a th:href="@{/offers/edit/{id}(id=${offer.id})}" class="btn btn-success">Aggiorna</a>
+                    <!-- <a th:href="@{/offers/create}" class="btn btn-success">Aggiorna</a> -->
+<!-- RIGUARDA -->
+
                 </li>
             </ul>
         </div>

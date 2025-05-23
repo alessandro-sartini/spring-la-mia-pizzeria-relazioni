@@ -24,6 +24,8 @@
 
 
             <form id="pizza-form" th:object="${pizza}" th:action="@{/pizze/create}" method="post">
+            <!-- <form id="pizza-form" th:object="${pizza}" th:action="${edit}?@{|/pizze/modify/${offers.id}|}:{/pizze/create}" method="post"> -->
+
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
                     <input type="text" class="form-control" id="name" th:field="*{name}" th:errorclass="is-invalid">
