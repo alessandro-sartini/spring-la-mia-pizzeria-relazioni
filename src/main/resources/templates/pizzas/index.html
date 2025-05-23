@@ -14,8 +14,8 @@
     
     <main>
         <div class="container my-4">
-            <div class="d-flex justify-content-around align-items-center">
-                <form th:action="@{/pizze/searchByName}" class="mb-3">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 gap-3">
+                <form th:action="@{/pizze/searchByName}" class="mb-0 flex-grow-1" style="max-width: 500px;">
                     <div class="input-group">
                         <input type="text" required name="query" class="form-control" placeholder="Cerca pizza per nome...">
                         <button type="submit" class="btn btn-primary">Cerca</button>
@@ -23,34 +23,30 @@
                 </form>
             </div>
 
-            <h1 class="my-4">Elenco pizze: </h1>
-            <div class="row" th:if="${pizzaList.size() > 0}">
-                <div th:each="pizza : ${pizzaList}" th:object="${pizza}" class="col-md-4 mb-4">
-                    <div class="card" style="width: 100%;">
-                        <img th:src="*{urlPhoto}" class="card-img-top" alt="foto pizza">
-                        <div class="card-body text-center">
-                            <h5 class="card-title" th:text="|*{name}|"></h5>
-                            <p class="card-text" th:text="|prezzo: €*{price}|"></p>
-                            <div class="d-flex justify-content-around flex-wrap">
-                                <a  th:href="@{pizze/{id}(id=*{id})}" class="btn btn-primary col-5 m-1">Dettagli</a>
-                                <a th:href="@{pizze/edit/{id}(id=*{id})}" class="btn btn-primary col-5 m-1">Modifica</a>
-                                
-                                <button type="button" class="btn btn-danger col-5 m-1"
+            <h1 class="my-4 text-warning fw-bold display-5">Elenco pizze: </h1>
+            <div class="row g-4" th:if="${pizzaList.size() > 0}">
+                <div th:each="pizza : ${pizzaList}" th:object="${pizza}" class="col-12 col-sm-6 col-lg-4 d-flex align-items-stretch">
+                    <div class="card bg-dark text-light shadow w-100 border-warning">
+                        <img th:src="*{urlPhoto}" class="card-img-top img-fluid rounded-top" style="object-fit:cover; height:220px; background:#222;" alt="foto pizza">
+                        <div class="card-body text-center d-flex flex-column justify-content-between">
+                            <h5 class="card-title text-warning fw-bold" th:text="|*{name}|"></h5>
+                            <p class="card-text fs-5 mb-2" th:text="|prezzo: €*{price}|"></p>
+                            <div class="d-flex flex-wrap justify-content-center gap-2 mt-auto">
+                                <a th:href="@{pizze/{id}(id=*{id})}" class="btn btn-outline-warning btn-sm">Dettagli</a>
+                                <a th:href="@{pizze/edit/{id}(id=*{id})}" class="btn btn-outline-primary btn-sm">Modifica</a>
+                                <button type="button" class="btn btn-outline-danger btn-sm"
                                         data-bs-toggle="modal"
                                         data-bs-target="#deleteConfirmModal"
-                                        th:data-pizza-id="*{id}" 
-                                        th:data-pizza-name="*{name}"> 
+                                        th:data-pizza-id="*{id}"
+                                        th:data-pizza-name="*{name}">
                                         Elimina
                                 </button>
                                 <!-- <a th:href="@{pizze/offers/{id}(id=*{id})}" class="btn btn-primary col-5 m-1">Crea offerta</a> -->
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            
         </div>
         
         <div class="container" th:unless="${pizzaList.size() > 0}">
