@@ -31,17 +31,19 @@
                         <div class="card-body text-center">
                             <h5 class="card-title" th:text="|*{name}|"></h5>
                             <p class="card-text" th:text="|prezzo: €*{price}|"></p>
-                            <div class="d-flex justify-content-between">
-                                <a th:href="@{pizze/{id}(id=*{id})}" class="btn btn-primary">Dettagli</a>
-                                <a th:href="@{pizze/edit/{id}(id=*{id})}" class="btn btn-primary">Modifica</a>
+                            <div class="d-flex justify-content-between flex-wrap">
+                                <a  th:href="@{pizze/{id}(id=*{id})}" class="btn btn-primary col-5 m-1">Dettagli</a>
+                                <a th:href="@{pizze/edit/{id}(id=*{id})}" class="btn btn-primary col-5 m-1">Modifica</a>
                                 
-                                <button type="button" class="btn btn-danger"
+                                <button type="button" class="btn btn-danger col-5 m-1"
                                         data-bs-toggle="modal"
                                         data-bs-target="#deleteConfirmModal"
                                         th:data-pizza-id="*{id}" 
                                         th:data-pizza-name="*{name}"> 
                                         Elimina
                                 </button>
+                                <a th:href="@{pizze/offers/{id}(id=*{id})}" class="btn btn-primary col-5 m-1">Crea offerta</a>
+
                             </div>
                         </div>
                     </div>
