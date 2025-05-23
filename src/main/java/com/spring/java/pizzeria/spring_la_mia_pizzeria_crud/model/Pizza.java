@@ -36,22 +36,21 @@ public class Pizza {
 
     @NotBlank(message = "the description not be null/empty")
     private String urlPhoto;
-    
+
     @NotNull(message = "Il prezzo non può essere nullo.")
     @Min(value = 4, message = "Il prezzo deve essere almeno 4.")
     private BigDecimal price;
 
     @OneToMany(mappedBy = "pizza")
-    private List<SpecialOffer> offerts;
+    private List<SpecialOffer> offers;
 
-    public List<SpecialOffer> getOfferts() {
-        return this.offerts;
+    public List<SpecialOffer> getOffers() {
+        return this.offers;
     }
 
-    public void setOfferts(List<SpecialOffer> offerts) {
-        this.offerts = offerts;
+    public void setOffers(List<SpecialOffer> offers) {
+        this.offers = offers;
     }
-
 
     public Integer getId() {
         return this.id;

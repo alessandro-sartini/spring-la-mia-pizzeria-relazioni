@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.model.Pizza;
 import com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.model.SpecialOffer;
+import com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.repo.OfferRepository;
 import com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.repo.PizzaRepository;
 
 import jakarta.validation.Valid;
@@ -28,6 +29,10 @@ public class PizzaController {
 
     @Autowired
     private PizzaRepository repository;
+
+    // @Autowired
+    // private OfferRepository offerRepository;
+
 
     @GetMapping
     public String index(Model model) {

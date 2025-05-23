@@ -26,6 +26,21 @@
                 </div>
             </div>
         </div>
+
+
+
+         <div  class="container my-4 text-center">
+            <a th:href="@{/pizze/offers/{id}(id=*{id})}" class="btn btn-primary col-5 my-3">Crea offerta</a>
+
+            <ul th:each="offer: ${pizza.offers}">
+                <li>
+                    <h5 class="text-primary">[[${offer.title}]]</h5>
+                    <span class="text-success">Data inizio: [[${offer.startDate}]] </span>
+                    |||
+                    <span class="text-danger">Data termine: [[${offer.finishDate}]]</span>
+                </li>
+            </ul>
+        </div>
        
         <div th:unless="${pizza}!=null" class="container my-4 text-center">
             <h1 th:text="|Nessuna pizza disponibile|"> </h1>    

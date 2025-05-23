@@ -31,7 +31,7 @@
                         <div class="card-body text-center">
                             <h5 class="card-title" th:text="|*{name}|"></h5>
                             <p class="card-text" th:text="|prezzo: €*{price}|"></p>
-                            <div class="d-flex justify-content-between flex-wrap">
+                            <div class="d-flex justify-content-around flex-wrap">
                                 <a  th:href="@{pizze/{id}(id=*{id})}" class="btn btn-primary col-5 m-1">Dettagli</a>
                                 <a th:href="@{pizze/edit/{id}(id=*{id})}" class="btn btn-primary col-5 m-1">Modifica</a>
                                 
@@ -42,13 +42,15 @@
                                         th:data-pizza-name="*{name}"> 
                                         Elimina
                                 </button>
-                                <a th:href="@{pizze/offers/{id}(id=*{id})}" class="btn btn-primary col-5 m-1">Crea offerta</a>
+                                <!-- <a th:href="@{pizze/offers/{id}(id=*{id})}" class="btn btn-primary col-5 m-1">Crea offerta</a> -->
 
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            
         </div>
         
         <div class="container" th:unless="${pizzaList.size() > 0}">
