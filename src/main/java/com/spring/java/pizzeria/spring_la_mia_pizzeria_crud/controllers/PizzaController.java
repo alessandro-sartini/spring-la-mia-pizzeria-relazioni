@@ -75,7 +75,7 @@ public class PizzaController {
     public String create(Model model) {
 
         model.addAttribute("pizza", new Pizza());
-        return "pizzas/create";
+        return "pizzas/edit-create";
 
     }
 
@@ -83,7 +83,8 @@ public class PizzaController {
     public String store(@Valid @ModelAttribute("pizza") Pizza formPizza,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "pizzas/create";
+            // return "pizzas/edit";
+            return "pizzas/edit-create";
         }
         repository.save(formPizza);
         return "redirect:/pizze";
@@ -93,15 +94,16 @@ public class PizzaController {
     public String edit(Model model, @PathVariable("id") Integer id) {
 
         model.addAttribute("pizza", repository.findById(id).get());
+        model.addAttribute("edit", true);
 
-        return "pizzas/edit";
+        return "pizzas/edit-create";
     }
 
     @PostMapping("/edit/{id}")
     public String update(@Valid @ModelAttribute("pizza") Pizza formPizza,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "pizzas/edit";
+            return "pizzas/edit-create";
         }
         repository.save(formPizza);
         return "redirect:/pizze";
@@ -126,7 +128,7 @@ public class PizzaController {
         SpecialOffer offer = new SpecialOffer();
         offer.setPizza(repository.findById(id).get());
         model.addAttribute("offer", offer);
-        return "offers/create";
+        return "offers/edit-create";
     }
 
 }

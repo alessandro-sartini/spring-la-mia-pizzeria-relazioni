@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -32,7 +31,7 @@ public class OffersController {
     public String store(@Valid @ModelAttribute("offer")SpecialOffer formOffer, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "offers/create";
+            return "offers/edit-create";
         }
         repository.save(formOffer);
 
@@ -49,7 +48,7 @@ public String edit(Model model, @PathVariable Integer id) {
     System.out.println("DEBUG finishDate: " + offer.getFinishDate());
     model.addAttribute("offer", offer);
     model.addAttribute("edit", true);
-    return "offers/create";
+    return "offers/edit-create";
 }
 
     
@@ -58,7 +57,7 @@ public String edit(Model model, @PathVariable Integer id) {
     public String update(@Valid @ModelAttribute("offer")SpecialOffer formOffer, BindingResult bindingResult, Model model, @PathVariable Integer id) {
 
         if (bindingResult.hasErrors()) {
-            return "offers/create";
+            return "offers/edit-create";
         }
         repository.save(formOffer);
 
