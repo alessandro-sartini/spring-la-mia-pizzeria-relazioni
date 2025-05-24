@@ -113,7 +113,6 @@ public class PizzaController {
     public String delete(@PathVariable("id") Integer id) {
         Pizza pizza = repository.findById(id).get();
 
-        // SpecialOffer offers= offerRepository.findById(id)
         for (SpecialOffer offer : pizza.getOffers()) {
             offerRepository.delete(offer);
         }
