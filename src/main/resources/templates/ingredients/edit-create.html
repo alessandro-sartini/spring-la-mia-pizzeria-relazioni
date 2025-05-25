@@ -20,10 +20,14 @@
 
     </header>
     <main>
-        <div class="container my-4">
+        <div class="container my-4" th:object="${ingredient}">
+            <div class="text-center">
 
-            <h1>Aggiorna dati piazza:</h1>
-            <form id="ingredient-form" th:object="${ingredient}" th:action="${edit} ? @{/ingredient/edit/{id}(id=*{id})} :  @{/ingredient/create}" method="post">
+                <h1 th:if="${edit}" th:text="|Aggiorna dati: |"></h1>
+                <span class="text-warning fs-2">[[*{name}]]</span>
+            </div>
+            <h1 th:unless="${edit}">Aggiungi categoria:</h1>
+            <form id="ingredient-form"  th:action="${edit} ? @{/ingredient/edit/{id}(id=*{id})} :  @{/ingredient/create}" method="post">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
                     <input type="text" class="form-control" id="name" th:field="*{name}"  th:errorclass="is-invalid">
@@ -36,11 +40,10 @@
                         </ul>
 
                     </div>
-                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
                 
                 
-                <input type="submit" class="btn btn-primary" th:value="${edit} ? 'aggiorna Pizza' : 'Crea Pizza'"/>
+                <input type="submit" class="btn btn-primary" th:value="${edit} ? 'aggiorna dati' : 'Crea ingediente'"/>
             </form>
         </div>
 

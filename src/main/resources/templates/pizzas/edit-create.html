@@ -38,6 +38,26 @@
                     </div>
                     <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
+
+                <!-- ingredienti -->
+                 <div class="mb-3">
+                    <h3 th:for="ingredients" class="form-label">Ingredienti:</h3>
+
+                    <div class="" th:each="ingredient: ${ingredients}">
+                        <input type="checkbox" th:value="${ingredient.id}" th:id="|ingredient-${ingredient.id}|" th:field="${pizza.ingredients}" >
+                        <label th:for="|ingredient-${ingredient.id}|"  th:text="${ingredient.name}"></label>
+                    </div>
+
+                    <!-- <div th:if="${#fields.hasErrors('price')}" class="text-danger" th:errors="*{price}"></div> -->
+                </div>  
+
+
+
+
+
+
+
+
                 <div class="mb-3">
                     <label for="price" class="form-label">Prezzo</label>
                     <input type="number" th:field="*{price}" class="form-control" id="price" th:errorclass="is-invalid">

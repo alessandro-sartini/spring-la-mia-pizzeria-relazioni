@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.model.Pizza;
 import com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.model.SpecialOffer;
+import com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.repo.IngredientRepository;
 import com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.repo.OfferRepository;
 import com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.repo.PizzaRepository;
 
@@ -25,12 +26,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequestMapping("/pizze")
 public class PizzaController {
+    @Autowired
+    private IngredientRepository ingredientRepository;
 
     @Autowired
     private PizzaRepository repository;
 
     @Autowired
     private OfferRepository offerRepository;
+
+    PizzaController(IngredientRepository ingredientRepository) {
+        this.ingredientRepository = ingredientRepository;
+    }
 
     @GetMapping
     public String index(Model model) {
@@ -73,7 +80,7 @@ public class PizzaController {
 
     @GetMapping("/create")
     public String create(Model model) {
-
+        model.addAttribute("ingredients", ingredientRepository.findAll());
         model.addAttribute("pizza", new Pizza());
         return "pizzas/edit-create";
 
@@ -81,9 +88,12 @@ public class PizzaController {
 
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("pizza") Pizza formPizza,
-            BindingResult bindingResult) {
+            BindingResult bindingResult, Model model) {
+
         if (bindingResult.hasErrors()) {
             // return "pizzas/edit";
+            model.addAttribute("ingredients", ingredientRepository.findAll());
+
             return "pizzas/edit-create";
         }
         repository.save(formPizza);
@@ -92,6 +102,7 @@ public class PizzaController {
 
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") Integer id) {
+        model.addAttribute("ingredients", ingredientRepository.findAll());
 
         model.addAttribute("pizza", repository.findById(id).get());
         model.addAttribute("edit", true);
@@ -101,8 +112,10 @@ public class PizzaController {
 
     @PostMapping("/edit/{id}")
     public String update(@Valid @ModelAttribute("pizza") Pizza formPizza,
-            BindingResult bindingResult) {
+            BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("ingredients", ingredientRepository.findAll());
+
             return "pizzas/edit-create";
         }
         repository.save(formPizza);

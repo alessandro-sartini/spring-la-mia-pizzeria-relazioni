@@ -54,7 +54,16 @@ public class Pizza {
         joinColumns = @JoinColumn(name = "pizza_id"),
         inverseJoinColumns = @JoinColumn(name="ingredient_id")
     )
-    List<Ingredient> ingredients;
+
+    private List<Ingredient> ingredients;
+
+    public List<Ingredient> getIngredients() {
+        return this.ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
 
     public List<SpecialOffer> getOffers() {
         return this.offers;
