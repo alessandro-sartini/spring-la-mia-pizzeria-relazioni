@@ -35,10 +35,7 @@ public class PizzaController {
     @Autowired
     private OfferRepository offerRepository;
 
-    PizzaController(IngredientRepository ingredientRepository) {
-        this.ingredientRepository = ingredientRepository;
-    }
-
+ 
     @GetMapping
     public String index(Model model) {
 
